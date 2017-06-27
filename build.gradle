@@ -1,0 +1,10 @@
+description ="""
+JLibs Gradle build
+
+Project name: ${project.name}"""
+
+/*task hello {
+    doLast {
+        println 'Hello Gradl2e'
+    }
+}*/
