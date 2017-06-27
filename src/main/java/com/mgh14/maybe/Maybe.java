@@ -40,7 +40,7 @@ public class Maybe<T> {
                 .getValue();
         System.out.println("Added: " + added);
     }
-    
+
     private final T operand;
 
     public Maybe(T operand) {
@@ -67,7 +67,7 @@ public class Maybe<T> {
     public <V> Maybe<V> presentThenDo(Function<T, V> function) {
         return presentThenDo(null, (BiFunction<T, T, V>) (t, t2) -> {
             return function.apply(t);   // intentionally ignore arg t2,
-                                        // which should be null here anyways
+            // which should be null here anyways
         });
     }
 
