@@ -3,7 +3,6 @@ package com.mgh14.maybe;
 import com.mgh14.junction.Junction;
 
 import java.util.Objects;
-import java.util.function.Function;
 
 /**
  * TODO: Document
@@ -44,7 +43,7 @@ public class Maybe<T> extends Junction<T> {
         System.out.println("Added: " + added);*/
     }
 
-    @Override
+    /*@Override
     public <V> Maybe<V> doOperation(Function<T, V> function) {
         V value = Maybe.of(super.getValue())
                 .ifPresent()
@@ -57,7 +56,7 @@ public class Maybe<T> extends Junction<T> {
     public <V> Maybe<V> orElseDo(Function<T, V> failFunction) {
         return Maybe.of((T) null)
                 .doOperation(failFunction);
-    }
+    }*/
 
     public Maybe<T> ifPresent() {
         Junction<T> result = super.ifSucceeds(Objects::nonNull);
