@@ -16,103 +16,103 @@ public class JunctionTest {
             new RuntimeException("Junction Runtime Exception");
 
     @Test
-    public void testOf_expectedNonNullValue() {
+    void testOf_expectedNonNullValue() {
         assertJunctionValue(Junction.of(NONNULL_VALUE), NONNULL_VALUE);
     }
 
     @Test
-    public void testOf_expectedNullValue() {
+    void testOf_expectedNullValue() {
         assertJunctionValue(Junction.of(), null);
     }
 
     @Test
-    public void testEmpty_expectedNullValue() {
+    void testEmpty_expectedNullValue() {
         assertJunctionValue(Junction.empty(), null);
     }
 
     @Test
-    public void testOf_junctionOfJunction() {
+    void testOf_junctionOfJunction() {
         assertJunctionValue(Junction.of(Junction.empty()), Junction.empty());
     }
 
     @Test
-    public void testGetValue_nonNullOperand() {
+    void testGetValue_nonNullOperand() {
         assertThat(Junction.of(NONNULL_VALUE).getValue(), equalTo(NONNULL_VALUE));
     }
 
     @Test
-    public void testGetValue_nullOperand() {
+    void testGetValue_nullOperand() {
         assertThat(Junction.of().getValue(), is(nullValue()));
     }
 
     @Test
-    public void testIfSucceeds_nonEmptyOperand_nullPredicate() {
+    void testIfSucceeds_nonNullOperand_nullPredicate() {
         Junction<String> result = Junction.of(NONNULL_VALUE).ifSucceeds(null);
         assertJunctionValue(result, null);
     }
     
     @Test
-    public void testIfSucceeds_emptyOperand_nullPredicate() {
+    void testIfSucceeds_nullOperand_nullPredicate() {
         Junction<String> result = Junction.of((String) null).ifSucceeds(null);
         assertJunctionValue(result, null);
     }
 
     @Test
-    public void testIfSucceeds_nonEmptyOperand_conditionSucceeds() {
+    void testIfSucceeds_nonNullOperand_conditionSucceeds() {
         Junction<String> result = Junction.of(NONNULL_VALUE).ifSucceeds(s -> true);
         assertJunctionValue(result, NONNULL_VALUE);
     }
 
     @Test
-    public void testIfSucceeds_emptyOperand_conditionSucceeds() {
+    void testIfSucceeds_nullOperand_conditionSucceeds() {
         Junction<String> result = Junction.of((String) null).ifSucceeds(s -> true);
         assertJunctionValue(result, null);
     }
 
     @Test
-    public void testIfSucceeds_nonEmptyOperand_conditionFails() {
+    void testIfSucceeds_nonNullOperand_conditionFails() {
         Junction<String> result = Junction.of(NONNULL_VALUE).ifSucceeds(s -> false);
         assertJunctionValue(result, null);
     }
     
     @Test
-    public void testIfSucceeds_emptyOperand_conditionFails() {
+    void testIfSucceeds_nullOperand_conditionFails() {
         Junction<String> result = Junction.of((String) null).ifSucceeds(s -> false);
         assertJunctionValue(result, null);
     }
 
     @Test
-    public void testIfFails_nonEmptyOperand_nullPredicate() {
+    void testIfFails_nonNullOperand_nullPredicate() {
         Junction<String> result = Junction.of(NONNULL_VALUE).ifFails(null);
         assertJunctionValue(result, NONNULL_VALUE);
     }
 
     @Test
-    public void testIfFails_emptyOperand_nullPredicate() {
+    void testIfFails_nullOperand_nullPredicate() {
         Junction<String> result = Junction.of((String) null).ifFails(null);
         assertJunctionValue(result, null);
     }
 
     @Test
-    public void testIfFails_nonEmptyOperand_conditionSucceeds() {
+    void testIfFails_nonNullOperand_conditionSucceeds() {
         Junction<String> result = Junction.of(NONNULL_VALUE).ifFails(s -> true);
         assertJunctionValue(result, null);
     }
 
     @Test
-    public void testIfFails_emptyOperand_conditionSucceeds() {
+    void testIfFails_nullOperand_conditionSucceeds() {
         Junction<String> result = Junction.of((String) null).ifFails(s -> true);
         assertJunctionValue(result, null);
     }
 
     @Test
-    public void testIfFails_nonEmptyOperand_conditionFails() {
+    void testIfFails_nonNullOperand_conditionFails() {
         Junction<String> result = Junction.of(NONNULL_VALUE).ifFails(s -> false);
         assertJunctionValue(result, NONNULL_VALUE);
     }
 
     @Test
-    public void testIfFails_emptyOperand_conditionFails() {
+    void testIfFails_nullOperand_conditionFails() {
         Junction<String> result = Junction.of((String) null).ifFails(s -> false);
         assertJunctionValue(result, null);
     }
@@ -278,40 +278,40 @@ public class JunctionTest {
     }
 
     @Test
-    public void testOrElseThrow_returnJunction_nonNullExceptionParam() {
+    void testOrElseThrow_returnJunction_nonNullExceptionParam() {
         Exception result = assertThrows(TEST_EXCEPTION.getClass(),
                 () -> Junction.of().orElseThrow_returnJunction(TEST_EXCEPTION));
         assertThat(result, sameInstance(TEST_EXCEPTION));
     }
 
     @Test
-    public void tetOrElseThrow_returnJunction_nullExceptionParam() {
+    void tetOrElseThrow_returnJunction_nullExceptionParam() {
         assertThrows(NullPointerException.class,
                 () -> Junction.of().orElseThrow_returnJunction(null));
     }
 
     @Test
-    public void testOrElseThrow_returnValue_nonNullExceptionParam() {
+    void testOrElseThrow_returnValue_nonNullExceptionParam() {
         Exception result = assertThrows(TEST_EXCEPTION.getClass(),
                 () -> Junction.of().orElseThrow_returnValue(TEST_EXCEPTION));
         assertThat(result, sameInstance(TEST_EXCEPTION));
     }
 
     @Test
-    public void testOrElseThrow_returnValue_nullExceptionParam() {
+    void testOrElseThrow_returnValue_nullExceptionParam() {
         assertThrows(NullPointerException.class,
                 () -> Junction.of().orElseThrow_returnValue(null));
     }
 
     @Test
-    public void testStream_nonNullOperand() {
+    void testStream_nonNullOperand() {
         Stream<String> stream = Junction.of(NONNULL_VALUE).stream();
         Optional<String> streamResult = stream.findAny();
         assertThat(streamResult.isPresent(), is(equalTo(true)));
     }
 
     @Test
-    public void testStream_nullOperand() {
+    void testStream_nullOperand() {
         assertThrows(NullPointerException.class, () -> {
             Stream<String> streamResult = Junction.of((String) null).stream();
             streamResult.findAny();
@@ -319,26 +319,26 @@ public class JunctionTest {
     }
 
     @Test
-    public void testEquals_nullOther() {
+    void testEquals_nullOther() {
         boolean result = Junction.of().equals(null);
         assertThat(result, is(equalTo(false)));
     }
 
     @Test
-    public void testEquals_otherNotInstanceOfJunction() {
+    void testEquals_otherNotInstanceOfJunction() {
         boolean result = Junction.of().equals(new Object());
         assertThat(result, is(equalTo(false)));
     }
 
     @Test
-    public void testEquals_otherIsThis() {
+    void testEquals_otherIsThis() {
         Junction<String> junction = Junction.of((String) null);
         boolean result = junction.equals(junction);
         assertThat(result, is(equalTo(true)));
     }
 
     @Test
-    public void testEquals_bothOperandsNull() {
+    void testEquals_bothOperandsNull() {
         Junction<String> junctionOne = Junction.of((String) null);
         Junction<String> junctionTwo = Junction.of((String) null);
 
@@ -347,7 +347,7 @@ public class JunctionTest {
     }
 
     @Test
-    public void testEquals_thisOperandNull_otherNonNull() {
+    void testEquals_thisOperandNull_otherNonNull() {
         Junction<String> junctionOne = Junction.of((String) null);
         Junction<String> junctionTwo = Junction.of(NONNULL_VALUE);
 
@@ -356,7 +356,7 @@ public class JunctionTest {
     }
 
     @Test
-    public void testEquals_thisOperandNotNull_otherNull() {
+    void testEquals_thisOperandNotNull_otherNull() {
         Junction<String> junctionOne = Junction.of(NONNULL_VALUE);
         Junction<String> junctionTwo = Junction.of((String) null);
 
@@ -365,7 +365,7 @@ public class JunctionTest {
     }
 
     @Test
-    public void testEquals_bothOperandsNotNull() {
+    void testEquals_bothOperandsNotNull() {
         // Note: we assume with confidence that the java.lang.String#equals()
         // method is implemented correctly
         Junction<String> junctionOne = Junction.of(NONNULL_VALUE);
@@ -375,13 +375,13 @@ public class JunctionTest {
         assertThat(result, is(equalTo(true)));    }
 
     @Test
-    public void testHashCode_nonEmptyOperand() {
+    void testHashCode_nonNullOperand() {
         assertThat(Junction.of(NONNULL_VALUE).hashCode(),
                 equalTo(NONNULL_VALUE.hashCode()));
     }
 
     @Test
-    public void testHashCode_emptyOperand() {
+    void testHashCode_nullOperand() {
         assertThat(Junction.of().hashCode(), equalTo(112358));
     }
     
