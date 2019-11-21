@@ -20,8 +20,10 @@ public class RegularMutableVsImmutableDerivedDataConstructors
             this.a = a;
         }
 
-        public String getB() {
-            if (b == null) {
+        public String getB()
+        {
+            if (b == null)
+            {
                 b = a + ";second string: calculated later";
             }
 
