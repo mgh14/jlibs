@@ -1,6 +1,6 @@
 package com.mgh14.nn;
 
-import com.mgh14.maybe.Maybe;
+import com.mgh14.junction.Maybe;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

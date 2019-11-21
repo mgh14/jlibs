@@ -1,6 +1,4 @@
-package com.mgh14.maybe;
-
-import com.mgh14.junction.Junction;
+package com.mgh14.junction;
 
 import java.util.Objects;
 
